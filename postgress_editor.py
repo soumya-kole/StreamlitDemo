@@ -54,14 +54,15 @@ editor = st.data_editor(
     use_container_width=True,
     num_rows="fixed",
     key="employee_editor",
-    on_change=lambda: st.session_state.update({"edited_rows": st.session_state.employee_editor.get("edited_rows", {})})
+    # on_change=lambda: st.session_state.update({"edited_rows": st.session_state.employee_editor.get("edited_rows", {})})
 )
 
 # --- Get edited rows ---
 edited_rows = st.session_state.employee_editor.get("edited_rows", {})
 
 # --- Commit button ---
-if st.button("💾 Commit Changes"):
+
+def commit_changes():
     if edited_rows:
         changes = []
 
@@ -121,6 +122,12 @@ if st.button("💾 Commit Changes"):
         st.rerun()
     else:
         st.info("No changes detected.")
+
+
+if st.button("💾 Commit Change"):
+    commit_changes()
+if edited_rows:
+    commit_changes()
 
 # --- Debug info (optional) ---
 with st.expander("Debug Info"):
